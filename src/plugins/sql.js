@@ -1,6 +1,6 @@
 "use strict";
 
-const postgres = require( "postgres" );
+const postgres = require("postgres");
 
 module.exports = {
 	name: "sql",
@@ -11,6 +11,6 @@ module.exports = {
 		const sql = postgres();
 
 		// add to the request toolkit e.g. h.sql
-		server.decorate( "toolkit", "sql", sql );
+		server.decorate("toolkit", "sql", sql);
 	}
 };

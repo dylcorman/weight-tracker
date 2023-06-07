@@ -1,7 +1,7 @@
 "use strict";
 
-const dotenv = require( "dotenv" );
-const createServer = require( "./server" ).createServer;
+const dotenv = require("dotenv");
+const createServer = require("./server").createServer;
 
 const init = async () => {
 	dotenv.config();
@@ -9,14 +9,14 @@ const init = async () => {
 		port: process.env.PORT || 3000,
 		host: process.env.HOST || "localhost"
 	};
-	const server = await createServer( config );
+	const server = await createServer(config);
 	await server.start();
-	console.log( "Server running on %s", server.info.uri );
+	console.log("Server running on %s", server.info.uri);
 };
 
-process.on( "unhandledRejection", ( err ) => {
-	console.log( err );
-	process.exit( 1 );
-} );
+process.on("unhandledRejection", (err) => {
+	console.log(err);
+	process.exit(1);
+});
 
 init();

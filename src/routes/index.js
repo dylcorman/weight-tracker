@@ -1,9 +1,9 @@
 "use strict";
 
-const path = require( "path" );
-const api = require( "./api" );
-const auth = require( "./auth" );
-const measurements = require( "./measurements" );
+const path = require("path");
+const api = require("./api");
+const auth = require("./auth");
+const measurements = require("./measurements");
 
 const home = {
 	method: "GET",
@@ -12,8 +12,8 @@ const home = {
 		auth: {
 			mode: "try"
 		},
-		handler: ( request, h ) => {
-			return h.view( "index", { title: "Home" } );
+		handler: (request, h) => {
+			return h.view("index", { title: "Home" });
 		}
 	}
 };
@@ -22,8 +22,8 @@ const staticAssets = {
 	method: "GET",
 	path: "/assets/{param*}",
 	handler: {
-		directory:{ 
-			path: path.join( __dirname, "..", "assets" )
+		directory: {
+			path: path.join(__dirname, "..", "assets")
 		}
 	},
 	options: { auth: false }
@@ -32,8 +32,8 @@ const staticAssets = {
 const error404 = {
 	method: "*",
 	path: "/{any*}",
-	handler: function ( request, h ) {
-		return h.view( "404", { title: "Not Found" } ).code( 404 );
+	handler: function (request, h) {
+		return h.view("404", { title: "Not Found" }).code(404);
 	},
 	options: { auth: false }
 };
@@ -42,4 +42,4 @@ module.exports = [
 	home,
 	staticAssets,
 	error404
-].concat( api, auth, measurements );
+].concat(api, auth, measurements);
