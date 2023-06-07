@@ -1,0 +1,33 @@
+{
+  "name": "node-weight-tracker",
+  "version": "1.0.0",
+  "description": "Sample Node.js web application using hapi, PostgreSQL, and Okta",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon --watch src -e css,ejs,js src/index.js",
+    "initdb": "node tools/initdb.js",
+    "lint": "eslint --fix ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Dylan Corman",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-reverentgeek": "^2.2.0",
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "@hapi/bell": "^12.3.0",
+    "@hapi/boom": "^9.1.4",
+    "@hapi/cookie": "^11.0.2",
+    "@hapi/hapi": "^19.2.0",
+    "@hapi/inert": "^6.0.5",
+    "@hapi/joi": "^17.1.1",
+    "@hapi/vision": "^6.1.0",
+    "dotenv": "^16.1.4",
+    "ejs": "^3.1.9",
+    "joi": "^17.9.2",
+    "postgres": "^3.3.5"
+  }
+}
