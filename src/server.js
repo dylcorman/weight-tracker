@@ -14,9 +14,11 @@ const createServer = async config => {
 				failAction: (request, h, err) => {
 					throw err;
 				}
-			}
+			},
+			cors: true // Enable CORS here
 		}
 	});
+
 
 	await registerPlugins(server, config);
 	server.route(routes);

@@ -8,7 +8,7 @@ const login = {
 	options: {
 		handler: request => {
 			if (!request.auth.isAuthenticated) {
-				throw boom.unauthorized(`Authentication failed due to: ${request.auth.error.message}`);
+				return `Authentication failed due to: ${request.auth.error.message}`;
 			}
 		}
 	}
@@ -42,7 +42,6 @@ const logout = {
 			return h.redirect("/");
 		} catch (err) {
 			request.log(["error", "logout"], err);
-			throw boom.internal(err);
 		}
 	},
 	options: {

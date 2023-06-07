@@ -3,77 +3,38 @@
 const boom = require("@hapi/boom");
 const joi = require("@hapi/joi");
 
-/* // add a new measurement for the current user
 const addMeasurementForCurrentUser = {
 	method: "POST",
 	path: "/api/measurements",
-	handler: async ( request, h ) => {
+	handler: async (request, h) => {
+		console.log("Inside POST /api/measurements handler"); // <-- First log
 		try {
-			if ( !request.auth.isAuthenticated ) {
+			if (!request.auth.isAuthenticated) {
+				console.log("User is not authenticated"); // <-- Log for auth fail
 				return boom.unauthorized();
 			}
 			const userId = request.auth.credentials.profile.id;
 			const { measureDate, weight } = request.payload;
+			console.log("Received payload:", request.payload); // <-- Log to inspect payload
+			console.log(`userId: ${userId}, measureDate: ${measureDate}, weight: ${weight}`); // <-- Log to inspect variables
 			const res = await h.sql`INSERT INTO measurements
-				( user_id, measure_date, weight )
-				VALUES
-				( ${ userId }, ${ measureDate }, ${ weight } )
-		
-				RETURNING
-					id
-					, measure_date AS "measureDate"
-					, weight`;
-			return res.count > 0 ? res[0] : boom.badRequest();
-		} catch ( err ) {
-			console.log( err );
+		  ( user_id, measure_date, weight )
+		  VALUES
+		  ( ${userId}, ${measureDate}, ${weight} )
+  
+		  RETURNING
+			id
+			, measure_date AS "measureDate"
+			, weight`;
+			console.log("Database response:", res); // <-- Log to inspect database response
+			return res.count > 0 ? res[0] : boom.badRequest('Unable to insert measurement');
+		} catch (err) {
+			console.log("Error occurred:", err); // <-- Log to inspect any caught error
 			return boom.serverUnavailable();
 		}
 	},
 	options: {
 		auth: { mode: "try" },
-		validate: {
-			payload: joi.object( {
-				measureDate: joi.date(),
-				weight: joi.number()
-			} )
-		}
-	}
-}; */
-
-// add a new measurement for the current user
-const addMeasurementForCurrentUser = {
-	method: "POST",
-	path: "/api/measurements",
-	handler: async (request, h) => {
-		try {
-			if (!request.auth.isAuthenticated) {
-				return boom.unauthorized();
-			}
-			const userId = request.auth.credentials.profile.id;
-			const { measureDate, weight } = request.payload;
-			const res = await h.sql`INSERT INTO measurements
-                ( user_id, measure_date, weight )
-                VALUES
-                ( ${userId}, ${measureDate}, ${weight} )
-        
-                RETURNING
-                    id
-                    , measure_date AS "measureDate"
-                    , weight`;
-			if (res.count > 0) {
-				const response = h.response(res[0]);
-				console.log(response.statusCode); //
-				return response; // 
-			} else {
-				return boom.badRequest();
-			}
-		} catch (err) {
-			console.log(err);
-			return boom.serverUnavailable();
-		}
-	},
-	options: {
-		auth: { mode: "try" }, 
 		validate: {
 			payload: joi.object({
 				measureDate: joi.date(),
