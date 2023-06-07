@@ -34,9 +34,9 @@ WeightMaster is a web application that allows users to easily track their weight
     NODE_ENV=development
     HOST_URL=http://localhost:8080
     COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
-    OKTA_ORG_URL=https://dev-97079945.okta.com
-    OKTA_CLIENT_ID=0oa9uz7pfcXznm15V5d7
-    OKTA_CLIENT_SECRET=y4Wea49Xt9UVSmUw4FohpTp5jjR2NCF8wukXBhXz
+    OKTA_ORG_URL=https://{yoururl}
+    OKTA_CLIENT_ID={clientID}
+    OKTA_CLIENT_SECRET={clientSecret}
     PGHOST=localhost
     PGUSERNAME=postgres
     PGDATABASE=postgres
